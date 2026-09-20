@@ -30,7 +30,7 @@ pipeline {
                 echo 'Running SonarQube analysis...'
 
                 withSonarQubeEnv('SonarQube') {
-                    bat 'mvn sonar:sonar -Dsonar.projectKey=Lntproject1'
+                    bat 'mvn sonar:sonar -Dsonar.projectKey=Lntproject1 "-Dsonar.host.url=http://localhost:9000"'
                 }
             }
         }
