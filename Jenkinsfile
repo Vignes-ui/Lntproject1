@@ -24,15 +24,30 @@ pipeline {
                 bat 'mvn test'
             }
         }
+
+        stage('SonarQube Analysis') {
+            steps {
+                echo 'Running SonarQube analysis...'
+
+                withSonarQubeEnv('SonarQube') {
+                    bat 'mvn sonar:sonar -Dsonar.projectKey=Lntproject1'
+                }
+            }
+        }
     }
 
     post {
+
         success {
             echo 'CI Pipeline completed successfully!'
         }
 
         failure {
             echo 'CI Pipeline failed!'
+        }
+
+        always {
+            echo 'Pipeline execution completed.'
         }
     }
 }
